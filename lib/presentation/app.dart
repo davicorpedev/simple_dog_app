@@ -1,5 +1,5 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/presentation/pages/splash/splash_screen.dart';
 import 'package:dog_app/presentation/app_themes.dart';
+import 'package:dog_app/presentation/pages/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

@@ -1,4 +1,3 @@
-
 import 'package:dog_app/domain/entities/breed.dart';
 import 'package:meta/meta.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/server_config.dart';
 import 'package:dog_app/data/core/error/exceptions.dart';
 import 'package:dog_app/data/models/breed_model.dart';
+import 'package:dog_app/server_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 

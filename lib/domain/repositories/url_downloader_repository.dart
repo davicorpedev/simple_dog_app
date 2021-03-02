@@ -1,5 +1,5 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/domain/core/error/failures.dart';
 import 'package:flutter/services.dart';
 import 'package:image_downloader/image_downloader.dart';
 

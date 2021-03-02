@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dog_app/data/core/error/exceptions.dart';
 import 'package:dog_app/data/core/network/network_info.dart';
 import 'package:dog_app/data/datasources/dog_data_source.dart';
-import 'package:dog_app/data/models/dog_model.dart';
 import 'package:dog_app/domain/core/error/failures.dart';
 import 'package:dog_app/domain/entities/dog.dart';
 import 'package:meta/meta.dart';
