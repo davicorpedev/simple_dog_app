@@ -1,8 +1,8 @@
 import 'package:dog_app/application/dog/dogs_by_breed/dogs_by_breed_bloc.dart';
 import 'package:dog_app/domain/entities/breed.dart';
 import 'package:dog_app/injection_container.dart';
+import 'package:dog_app/presentation/core/widgets/breed_info.dart';
 import 'package:dog_app/presentation/pages/dog/dogs_by_breed/widgets/dog_grid.dart';
-import 'package:dog_app/presentation/widgets/breed_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,10 +16,7 @@ class DogByBreedPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-
-          ),
+          SliverAppBar(floating: true),
           SliverToBoxAdapter(
             child: BreedInfo(breed: breed),
           ),

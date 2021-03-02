@@ -1,4 +1,4 @@
-import 'package:dog_app/presentation/icon/paw_icons.dart';
+import 'package:dog_app/presentation/core/icon/paw_icons.dart';
 import 'package:dog_app/presentation/pages/breed/breed_page.dart';
 import 'package:dog_app/presentation/pages/dog/random_dog_detail/random_dog_detail_page.dart';
 import 'package:flutter/gestures.dart';

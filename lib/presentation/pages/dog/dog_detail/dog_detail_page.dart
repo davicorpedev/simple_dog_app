@@ -1,5 +1,5 @@
 import 'package:dog_app/domain/entities/dog.dart';
-import 'package:dog_app/presentation/widgets/download_image_icon_button.dart';
+import 'package:dog_app/presentation/core/widgets/download_image_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class DogDetailPage extends StatelessWidget {
