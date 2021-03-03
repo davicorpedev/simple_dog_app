@@ -21,7 +21,7 @@ class DogsByBreedBloc extends Bloc<DogsByBreedEvent, DogsByBreedState> {
   Stream<DogsByBreedState> mapEventToState(
     DogsByBreedEvent event,
   ) async* {
-    if (event is GetAllDogsByBreed) {
+    if (event is GetDogsByBreed) {
       yield Loading();
       final result = await repository.getDogsByBreed(event.breedId);
 

@@ -42,7 +42,7 @@ class BreedPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: BlocProvider(
-              create: (_) => sl<BreedBloc>()..add(GetAllBreeds()),
+              create: (_) => sl<BreedBloc>()..add(GetBreeds()),
               child: BlocBuilder<BreedBloc, BreedState>(
                 builder: (context, state) {
                   if (state is Loaded) {

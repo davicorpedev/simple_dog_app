@@ -5,4 +5,4 @@ abstract class BreedEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetAllBreeds extends BreedEvent {}
+class GetBreeds extends BreedEvent {}

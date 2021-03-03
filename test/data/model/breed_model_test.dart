@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/models/breed_model.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/entities/breed.dart';
+import 'package:dog_app/data/models/breed_model.dart';
+import 'package:dog_app/domain/entities/breed.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../fixtures/fixture_reader.dart';
+import '../../fixtures/fixture_reader.dart';
 
 void main() {
   final tBreedModel = BreedModel(

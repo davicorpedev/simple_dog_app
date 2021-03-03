@@ -1,27 +1,23 @@
-
-import 'package:dog_app/core/config/server_config.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/core/network/exceptions.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/datasources/dog_data_source.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/models/dog_model.dart';
-
+import 'package:dog_app/data/core/error/exceptions.dart';
+import 'package:dog_app/data/datasources/dog_data_source.dart';
+import 'package:dog_app/data/models/dog_model.dart';
+import 'package:dog_app/server_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../fixtures/fixture_reader.dart';
-
-
+import '../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
   MockHttpClient mockHttpClient;
-  DogDataSourceImpl dataSource;
+  DogDataSource dataSource;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = DogDataSourceImpl(client: mockHttpClient);
+    dataSource = DogDataSource(client: mockHttpClient);
   });
 
   group("getDogsByBreed", () {

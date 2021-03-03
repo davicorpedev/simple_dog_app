@@ -15,7 +15,7 @@ class _RandomDogDetailPageState extends State<RandomDogDetailPage> {
 
   @override
   void initState() {
-    bloc.add(GetARandomDog());
+    bloc.add(GetRandomDog());
 
     super.initState();
   }
@@ -37,7 +37,7 @@ class _RandomDogDetailPageState extends State<RandomDogDetailPage> {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
-              bloc.add(GetARandomDog());
+              bloc.add(GetRandomDog());
             },
           ),
         ],

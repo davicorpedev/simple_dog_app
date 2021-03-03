@@ -1,10 +1,10 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/core/network/exceptions.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/core/error/failures.dart';
-import 'package:dog_app/core/network/network_info.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/datasources/breed_data_source.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/data/models/breed_model.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/repositories/breed_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/data/core/error/exceptions.dart';
+import 'package:dog_app/data/core/network/network_info.dart';
+import 'package:dog_app/data/datasources/breed_data_source.dart';
+import 'package:dog_app/data/models/breed_model.dart';
+import 'package:dog_app/domain/core/error/failures.dart';
+import 'package:dog_app/domain/repositories/breed_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -15,12 +15,12 @@ class MockNetworkInfo extends Mock implements NetworkInfo {}
 void main() {
   MockNetworkInfo mockNetworkInfo;
   MockBreedDataSource mockBreedDataSource;
-  BreedRepositoryImpl repository;
+  BreedRepository repository;
 
   setUp(() {
     mockNetworkInfo = MockNetworkInfo();
     mockBreedDataSource = MockBreedDataSource();
-    repository = BreedRepositoryImpl(
+    repository = BreedRepository(
       dataSource: mockBreedDataSource,
       networkInfo: mockNetworkInfo,
     );

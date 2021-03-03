@@ -20,7 +20,7 @@ class RandomDogBloc extends Bloc<RandomDogEvent, RandomDogState> {
   Stream<RandomDogState> mapEventToState(
     RandomDogEvent event,
   ) async* {
-    if (event is GetARandomDog) {
+    if (event is GetRandomDog) {
       yield Loading();
       final result = await repository.getRandomDog();
 

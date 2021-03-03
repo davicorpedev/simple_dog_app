@@ -19,7 +19,7 @@ class BreedBloc extends Bloc<BreedEvent, BreedState> {
   Stream<BreedState> mapEventToState(
     BreedEvent event,
   ) async* {
-    if (event is GetAllBreeds) {
+    if (event is GetBreeds) {
       yield Loading();
       final result = await repository.getBreeds();
 

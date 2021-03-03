@@ -1,18 +1,20 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/application/download_image/download_image_cubit.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/repositories/url_downloader_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/application/download_image/download_image_cubit.dart';
+import 'package:dog_app/application/download_image/download_image_state.dart';
+import 'package:dog_app/domain/repositories/url_downloader_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockUrlDownloader extends Mock implements UrlDownloader {}
+class MockUrlDownloaderRepository extends Mock
+    implements UrlDownloaderRepository {}
 
 void main() {
-  MockUrlDownloader mockUrlDownloader;
+  MockUrlDownloaderRepository mockUrlDownloaderRepository;
   DownloadImageCubit cubit;
 
   setUp(() {
-    mockUrlDownloader = MockUrlDownloader();
-    cubit = DownloadImageCubit(downloader: mockUrlDownloader);
+    mockUrlDownloaderRepository = MockUrlDownloaderRepository();
+    cubit = DownloadImageCubit(repository: mockUrlDownloaderRepository);
   });
 
   test("initial state should be Initial", () {
@@ -21,20 +23,20 @@ void main() {
 
   group("download", () {
     test("should get image from url", () async {
-      when(mockUrlDownloader.download(any))
+      when(mockUrlDownloaderRepository.download(any))
           .thenAnswer((realInvocation) async => Right(true));
 
-      await mockUrlDownloader.download("url");
+      await mockUrlDownloaderRepository.download("url");
 
-      await untilCalled(mockUrlDownloader.download(any));
+      await untilCalled(mockUrlDownloaderRepository.download(any));
 
-      verify(mockUrlDownloader.download("url"));
+      verify(mockUrlDownloaderRepository.download("url"));
     });
 
     test(
         "should emit [Loading, Loaded] when the image is downloaded successfully",
         () {
-      when(mockUrlDownloader.download(any))
+      when(mockUrlDownloaderRepository.download(any))
           .thenAnswer((realInvocation) async => Right(true));
 
       final expected = [
@@ -48,7 +50,7 @@ void main() {
     });
 
     test("should emit [Loading, Error] when the image is NOT downloaded", () {
-      when(mockUrlDownloader.download(any))
+      when(mockUrlDownloaderRepository.download(any))
           .thenAnswer((realInvocation) async => Left(InvalidUrlDownloader()));
 
       final expected = [

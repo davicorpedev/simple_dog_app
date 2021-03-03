@@ -1,21 +1,20 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/core/error/failures.dart';
-import 'package:dog_app/core/usecases/usecase.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/entities/breed.dart';
-import 'package:dog_app/features/breed/domain/usecases/get_breeds.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/application/breed/breed_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/application/breed/breed_bloc.dart';
+import 'package:dog_app/domain/core/error/failures.dart';
+import 'package:dog_app/domain/entities/breed.dart';
+import 'package:dog_app/domain/repositories/breed_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockGetBreeds extends Mock implements GetBreeds {}
+class MockBreedRepository extends Mock implements BreedRepository {}
 
 void main() {
-  MockGetBreeds mockGetBreeds;
+  MockBreedRepository mockBreedRepository;
   BreedBloc bloc;
 
   setUp(() {
-    mockGetBreeds = MockGetBreeds();
-    bloc = BreedBloc(getBreeds: mockGetBreeds);
+    mockBreedRepository = MockBreedRepository();
+    bloc = BreedBloc(repository: mockBreedRepository);
   });
 
   test("initial state should be Empty", () {
@@ -34,19 +33,19 @@ void main() {
       ),
     ];
 
-    test("should get the data from the GetBreeds use case", () async {
-      when(mockGetBreeds(any))
+    test("should get the data from the repository", () async {
+      when(mockBreedRepository.getBreeds())
           .thenAnswer((realInvocation) async => Right(tBreedList));
 
-      bloc.add(GetAllBreeds());
+      bloc.add(GetBreeds());
 
-      await untilCalled(mockGetBreeds(any));
+      await untilCalled(mockBreedRepository.getBreeds());
 
-      verify(mockGetBreeds(NoParams()));
+      verify(mockBreedRepository.getBreeds());
     });
 
     test("should emit [Loading, Loaded] when data is gotten successfully", () {
-      when(mockGetBreeds(any))
+      when(mockBreedRepository.getBreeds())
           .thenAnswer((realInvocation) async => Right(tBreedList));
 
       final expected = [
@@ -57,11 +56,11 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetAllBreeds());
+      bloc.add(GetBreeds());
     });
 
     test("should emit [Loading, Error] with an error when the data fails", () {
-      when(mockGetBreeds(any))
+      when(mockBreedRepository.getBreeds())
           .thenAnswer((realInvocation) async => Left(ServerFailure()));
 
       final expected = [
@@ -72,7 +71,7 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetAllBreeds());
+      bloc.add(GetBreeds());
     });
   });
 }

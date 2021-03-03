@@ -23,7 +23,7 @@ class DogByBreedPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: BlocProvider(
               create: (_) => sl<DogsByBreedBloc>()
-                ..add(GetAllDogsByBreed(breedId: breed.id)),
+                ..add(GetDogsByBreed(breedId: breed.id)),
               child: BlocBuilder<DogsByBreedBloc, DogsByBreedState>(
                 builder: (context, state) {
                   if (state is Loaded) {

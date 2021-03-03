@@ -1,21 +1,20 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/core/error/failures.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/entities/dog.dart';
-import 'package:dog_app/core/usecases/usecase.dart';
-import 'package:dog_app/features/random_dog/domain/usecases/get_random_dog.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/application/dog/random_dog/random_dog_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/application/dog/random_dog/random_dog_bloc.dart';
+import 'package:dog_app/domain/core/error/failures.dart';
+import 'package:dog_app/domain/entities/dog.dart';
+import 'package:dog_app/domain/repositories/dog_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockGetRandomDog extends Mock implements GetRandomDog {}
+class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
-  MockGetRandomDog mockGetRandomDog;
+  MockDogRepository mockDogRepository;
   RandomDogBloc bloc;
 
   setUp(() {
-    mockGetRandomDog = MockGetRandomDog();
-    bloc = RandomDogBloc(getRandomDog: mockGetRandomDog);
+    mockDogRepository = MockDogRepository();
+    bloc = RandomDogBloc(repository: mockDogRepository);
   });
 
   test("initial state should be Initial", () {
@@ -37,19 +36,19 @@ void main() {
       ],
     );
 
-    test("should get the data from the GetRandomDog use case", () async {
-      when(mockGetRandomDog(any))
+    test("should get the data from the repository", () async {
+      when(mockDogRepository.getRandomDog())
           .thenAnswer((realInvocation) async => Right(tDog));
 
-      bloc.add(GetARandomDog());
+      bloc.add(GetRandomDog());
 
-      await untilCalled(mockGetRandomDog(any));
+      await untilCalled(mockDogRepository.getRandomDog());
 
-      verify(mockGetRandomDog(NoParams()));
+      verify(mockDogRepository.getRandomDog());
     });
 
     test("should emit [Loading, Loaded] when data is gotten successfully", () {
-      when(mockGetRandomDog(any))
+      when(mockDogRepository.getRandomDog())
           .thenAnswer((realInvocation) async => Right(tDog));
 
       final expected = [
@@ -60,11 +59,11 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetARandomDog());
+      bloc.add(GetRandomDog());
     });
 
     test("should emit [Loading, Error] with an error when the data fails", () {
-      when(mockGetRandomDog(any))
+      when(mockDogRepository.getRandomDog())
           .thenAnswer((realInvocation) async => Left(ServerFailure()));
 
       final expected = [
@@ -75,7 +74,7 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetARandomDog());
+      bloc.add(GetRandomDog());
     });
   });
 }

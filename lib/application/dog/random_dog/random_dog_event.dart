@@ -5,4 +5,4 @@ abstract class RandomDogEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetARandomDog extends RandomDogEvent {}
+class GetRandomDog extends RandomDogEvent {}

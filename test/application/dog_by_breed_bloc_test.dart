@@ -1,20 +1,20 @@
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/core/error/failures.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/domain/entities/dog.dart';
-import 'package:dog_app/features/dogs_by_breed/domain/usecases/get_dogs_by_breed.dart';
-import 'file:///C:/Users/davic/Desktop/workSpaceFlutter/refactor_dog_app/lib/application/dog/dogs_by_breed/dogs_by_breed_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dog_app/application/dog/dogs_by_breed/dogs_by_breed_bloc.dart';
+import 'package:dog_app/domain/core/error/failures.dart';
+import 'package:dog_app/domain/entities/dog.dart';
+import 'package:dog_app/domain/repositories/dog_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockGetDogsByBreed extends Mock implements GetDogsByBreed {}
+class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
-  MockGetDogsByBreed mockGetDogsByBreed;
+  MockDogRepository mockDogRepository;
   DogsByBreedBloc bloc;
 
   setUp(() {
-    mockGetDogsByBreed = MockGetDogsByBreed();
-    bloc = DogsByBreedBloc(getDogsByBreed: mockGetDogsByBreed);
+    mockDogRepository = MockDogRepository();
+    bloc = DogsByBreedBloc(repository: mockDogRepository);
   });
 
   test("initial state should be Empty", () {
@@ -40,19 +40,19 @@ void main() {
       ),
     ];
 
-    test("should get the data from the GetDogsByBreed use case", () async {
-      when(mockGetDogsByBreed(any))
+    test("should get the data from the repository", () async {
+      when(mockDogRepository.getDogsByBreed(any))
           .thenAnswer((realInvocation) async => Right(tDogList));
 
-      bloc.add(GetAllDogsByBreed(breedId: tBreedId));
+      bloc.add(GetDogsByBreed(breedId: tBreedId));
 
-      await untilCalled(mockGetDogsByBreed(any));
+      await untilCalled(mockDogRepository.getDogsByBreed(any));
 
-      verify(mockGetDogsByBreed(Params(breedId: tBreedId)));
+      verify(mockDogRepository.getDogsByBreed(tBreedId));
     });
 
     test("should emit [Loading, Loaded] when data is gotten successfully", () {
-      when(mockGetDogsByBreed(any))
+      when(mockDogRepository.getDogsByBreed(any))
           .thenAnswer((realInvocation) async => Right(tDogList));
 
       final expected = [
@@ -63,11 +63,11 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetAllDogsByBreed(breedId: tBreedId));
+      bloc.add(GetDogsByBreed(breedId: tBreedId));
     });
 
     test("should emit [Loading, Error] with an error when the data fails", () {
-      when(mockGetDogsByBreed(any))
+      when(mockDogRepository.getDogsByBreed(any))
           .thenAnswer((realInvocation) async => Left(ServerFailure()));
 
       final expected = [
@@ -78,7 +78,7 @@ void main() {
 
       expectLater(bloc, emitsInOrder(expected));
 
-      bloc.add(GetAllDogsByBreed(breedId: tBreedId));
+      bloc.add(GetDogsByBreed(breedId: tBreedId));
     });
   });
 }
