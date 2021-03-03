@@ -52,7 +52,6 @@ void main() {
           .thenAnswer((realInvocation) async => Right(tDog));
 
       final expected = [
-        Initial(),
         Loading(),
         Loaded(dog: tDog),
       ];
@@ -67,7 +66,6 @@ void main() {
           .thenAnswer((realInvocation) async => Left(ServerFailure()));
 
       final expected = [
-        Initial(),
         Loading(),
         Error(message: SERVER_FAILURE_MESSAGE),
       ];

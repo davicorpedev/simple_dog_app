@@ -49,7 +49,6 @@ void main() {
           .thenAnswer((realInvocation) async => Right(tBreedList));
 
       final expected = [
-        Empty(),
         Loading(),
         Loaded(breeds: tBreedList),
       ];
@@ -64,7 +63,6 @@ void main() {
           .thenAnswer((realInvocation) async => Left(ServerFailure()));
 
       final expected = [
-        Empty(),
         Loading(),
         Error(message: SERVER_FAILURE_MESSAGE),
       ];

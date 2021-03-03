@@ -92,7 +92,7 @@ void main() {
 
     test("should perform a GET request with a x-api-key in header", () async {
       when(mockHttpClient.get(any, headers: anyNamed("headers"))).thenAnswer(
-          (realInvocation) async => http.Response(fixture("dog.json"), 200));
+          (realInvocation) async => http.Response(fixture("dog_list.json"), 200));
 
       dataSource.getRandomDog();
 
@@ -106,7 +106,7 @@ void main() {
 
     test("should return a list of Dog when the request is 200", () async {
       when(mockHttpClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-          (realInvocation) async => http.Response(fixture("dog.json"), 200));
+          (realInvocation) async => http.Response(fixture("dog_list.json"), 200));
 
       final result = await dataSource.getRandomDog();
 
